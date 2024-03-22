@@ -1,0 +1,74 @@
+   {* https://github.com/github/details-menu-element *}
+   {* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details *}
+   <header id="details-menu">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+		<details style="display:inline-block;">
+		<summary id="summary-label">
+			<a id="summary-label-text" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
+		</summary>
+		<details-menu>
+		    <ul>
+
+			{if "signin"|@features_is_enabled}
+		    	{if $cfg.user}
+		    	<li>You are signed in as <span class="hey-look">{$cfg.user.username|escape}</span></li>
+			<li><a href="{$cfg.abs_root_url}account/">Your account</a></li>
+			<li><a href="{$cfg.abs_root_url}signout/">Sign out</a></li>
+
+			{else}
+
+			<li><a href="{$cfg.abs_root_url}signin/">Sign in</a></li>
+			{/if}
+
+			<hr />
+			{/if}
+
+			<li><a href="{$cfg.abs_root_url}about/">About</a></li>
+
+			{if "contact_page"|@features_is_enabled}
+			<li><a href="{$cfg.abs_root_url}contact/">Contact</a></li>
+			{/if}
+
+			{if "api"|@features_is_enabled and "api_documentation"|@features_is_enabled}
+			<li><a href="{$cfg.abs_root_url}api/">API</a></li>
+			{/if}
+
+		    </ul>
+		    </details-menu>
+       	        </details>
+		</nav>
+
+		{if 0}
+		{if "search"|@features_is_enabled}
+		<nav id="search-navi-right">
+		    <form method="GET" action="{$cfg.abs_root_url}search/" class="form-inline">	
+
+		    <button type="submit" style="background-color:transparent;padding-top:10px;border:none !important;" >
+		    <span style="display:inline-block;">
+		    <svg height="1.6rem" width="1.6rem" xmlns="http://www.w3.org/2000/svg" viewBox="00 0 512 512" data-fa-i2svg=""><path fill="#fff" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>
+		    </button>
+
+		    <input type="text" value="" id="q" name="q" placeholder="search {$cfg.site_name|escape}" style="display:inline;"/>
+
+		    </form>
+		</nav>
+		{/if}
+		<br clear="all" />
+
+		</nav>
+		{/if}
+
+		<nav id="nearby-navi-right" class="navi-right">
+
+			{if "signin"|@features_is_enabled}
+		    	{if $cfg.user}
+		    	Hello, <span class="hey-look">{$cfg.user.username|escape}</span>
+			{else}
+			<a href="{$cfg.abs_root_url}signin/">Sign in</a>
+			{/if}
+			{/if}
+
+		</nav>
+
+    </header>

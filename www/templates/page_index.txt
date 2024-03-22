@@ -1,0 +1,11 @@
+{include file="inc_head.txt"}
+
+<div class="container">
+     {if $cfg.user}
+     <p>Hello, {$cfg.user.username|escape}.</p>
+     {else}
+     <p>Hello.{if "signin"|@features_is_enabled} Would you like to <a href="{$cfg.abs_root_url}signin/">sign in</a> to your {$cfg.site_name|escape} account{if "signup"|@features_is_enabled} or <a href="{$cfg.abs_root_url}signup/">create a new one</a>{/if}?{/if}</p>
+     {/if}
+</div>
+
+{include file="inc_foot.txt"}
