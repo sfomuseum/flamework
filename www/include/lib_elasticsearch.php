@@ -312,7 +312,7 @@
 				else if (array_key_exists("buckets", $details)){
 
 					foreach ($details["buckets"] as $b){
-						if ($b["key_as_string"]){
+						if (isset($b["key_as_string"])){
 							$rsp["aggregations"][$bucket][$b["key_as_string"]] = $b["doc_count"];
 						} else {
 							$rsp["aggregations"][$bucket][$b["key"]] = $b["doc_count"];					
