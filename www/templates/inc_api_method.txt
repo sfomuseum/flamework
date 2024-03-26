@@ -59,7 +59,7 @@
 	{/if}
 
 	{if "api_extras"|@features_is_enabled and $details.extras|isset && $details.extras}
-	<li><strong>extras</strong> &#8212; {$cfg.api_extras.notes|@implode:" "|escape}</li>
+	<li><strong>extras</strong> &#8212; {" "|@implode:$cfg.api_extras.notes|escape}</li>
 	{/if}
 
 	{if $details.paginated|isset && $details.paginated}
