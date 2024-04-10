@@ -59,6 +59,24 @@
 	$GLOBALS['cfg']['enable_feature_api_documentation'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_explorer'] = 1;
 
+	# API (CORS)
+	
+	$GLOBALS['cfg']['enable_feature_api_cors'] = 1;
+	
+	$GLOBALS['cfg']['api_cors_allow_origin'] = array(
+		"*"
+	);
+	
+	$GLOBALS['cfg']['api_cors_allow_methods'] = array(
+		"OPTIONS",
+		"GET",
+		"POST",
+	);
+	
+	$GLOBALS['cfg']['api_cors_allow_headers'] = array(
+
+	);
+
 	$GLOBALS['cfg']['enable_feature_api_oauth2_token_refresh'] = 0;
 	$GLOBALS['cfg']['api_oauth2_token_refresh_window'] = 3600 * 1;
 	$GLOBALS['cfg']['api_oauth2_token_refresh_crumb_key'] = "";
