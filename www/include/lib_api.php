@@ -59,6 +59,16 @@
 			'remote_addr' => $addr,
 		));
 
+		# CORS pre-flight stuff
+		# https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+		if (($_SERVER['REQUEST_METHOD'] == "OPTIONS") && ($GLOBALS['cfg']['enable_feature_api_cors'])){
+
+			header("HTTP/1.1 204 No Content");
+			api_cors_headers();
+			exit();
+		}	
+
 		# This no longer works in PHP8 (php-fpm)
 		# apache_setenv("API_METHOD", $method);
 
@@ -103,8 +113,6 @@
 			if (! in_array($_SERVER['REQUEST_METHOD'], $allowed)){
 				api_output_error(405);
 			}
-
-			
 		}
 
 		# Make sure this is a valid output format for the method in question
@@ -204,6 +212,27 @@
 		exit();
 	}
 
+	#################################################################
+	
+	function api_cors_headers(){
+
+		if (count($GLOBALS['cfg']['api_cors_allow_origin'])){
+			$origins = implode(",", $GLOBALS['cfg']['api_cors_allow_origin']);
+			header("Access-Control-Allow-Origin: " . htmlspecialchars($origins));
+		}
+
+		if (count($GLOBALS['cfg']['api_cors_allow_methods'])){
+			$methods = implode(",", $GLOBALS['cfg']['api_cors_allow_methods']);
+			header("Access-Control-Allow-Methods: " . htmlspecialchars($methods));
+		}
+			
+		if (count($GLOBALS['cfg']['api_cors_allow_headers'])){
+		   	$headers = implode(",", $GLOBALS['cfg']['api_cors_allow_headers']);
+			header("Access-Control-Allow-Headers: " . htmlspecialchars($headers));
+		}
+
+	}
+	
 	#################################################################
 
 	# the end
