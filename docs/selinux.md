@@ -13,7 +13,7 @@ $> sudo setsebool -P httpd_can_network_connect_db 1
 If your application needs to do HTTP(s) requests, for example to a remote Elastic/OpenSearch endpoint, you'll need to enable `http_can_network_connect`.
 
 ```
-$> $setsebool -P httpd_can_network_connect 1
+$> sudo setsebool -P httpd_can_network_connect 1
 ```
 
 ## Smarty / Templates
