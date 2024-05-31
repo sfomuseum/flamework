@@ -49,13 +49,23 @@
 		
 		if ((isset($msg["params"])) && (count($msg["params"]))){
 
+			$params = $msg["params"];
 			$filtered_params = array();
 
 			$m = $GLOBALS['cfg']['api']['methods'][$msg["method"]];
 
 			if ((isset($m["parameters"])) && (is_array($m["parameters"]))){
 
-				foreach ($m["parameters"] as $p){
+				$allowed_params = $m["parameters"];
+
+				if ((isset($m["paginated"])) && ($m["paginated"])){
+					// This is not ideal but it will have to do for now...
+					$allowed_params[] = array("name" => "page");
+					$allowed_params[] = array("name" => "per_page");
+					$allowed_params[] = array("name" => "cursor");										
+				}
+
+				foreach ($allowed_params as $p){
 
 					$n = $p["name"];
 					

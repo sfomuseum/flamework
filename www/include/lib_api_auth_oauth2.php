@@ -67,6 +67,7 @@
 			return array('ok' => 0, 'error_code' => 494);
 		}
 
+		/*
 		$token_row = api_oauth2_access_tokens_get_by_token($access_token);
 
 		if (! $token_row){
@@ -91,6 +92,61 @@
 		if (! $rsp['ok']){
 			return $rsp;
 		}
+		*/
+
+		$token_row = null;
+		$key_row = null;
+
+		if (preg_match('/^st-/', $access_token)){
+
+			$token_row = api_site_tokens_get_access_token_for_token($access_token);
+
+			if (! $token_row){
+				return array('ok' => 0, 'error_code' => 493);
+			}
+
+			$key_row = api_site_tokens_get_api_key_by_id($token_row['api_key_id']);
+
+		} else {
+
+			$token_row = api_oauth2_access_tokens_get_by_token($access_token);
+			$key_row = api_keys_get_by_id($token_row['api_key_id']);
+		}
+
+		// START OF validate token and key
+
+		if (! $token_row){
+			return array('ok' => 0, 'error_code' => 493);
+		}
+
+		api_log(array(
+			"access_token_id" => $token_row["id"],
+			"access_token_user_id" => $token_row["user_id"]			
+		));
+
+		if ($key_row){
+			api_log(array(
+				"api_key_id" => $key_row["id"],
+				"api_key_user_id" => $key_row["user_id"],
+				"api_key_role_id" => $key_row["role_id"],				
+			));
+		}
+		
+		if ($token_row['disabled']){
+			return array('ok' => 0, 'error_code' => 492);
+		}
+
+		if (($token_row['expires']) && ($token_row['expires'] < time())){
+			return array('ok' => 0, 'error_code' => 491);
+		}
+
+		$rsp = api_keys_utils_is_valid_key($key_row);
+
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		// END OF validate token and key
 
 		if (isset($method['requires_perms'])){
 
@@ -130,10 +186,11 @@
 			if ((! $user) || ($user['deleted'])){
 				return array('ok' => 0, 'error_code' => 460);
 			}
+
 		}
 
-		#
-
+		# Staff checks are handled in lib_api_sfomuseum_staff.php
+		
 		return array(
 			'ok' => 1,
 			'access_token' => $token_row,
