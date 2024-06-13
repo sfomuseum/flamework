@@ -3,14 +3,36 @@
 	$GLOBALS['timings']['smarty_comp_count'] = 0;
 	$GLOBALS['timings']['smarty_comp_time']	 = 0;
 
-	# 5.0.0, required for PHP 8.2
-	# composer require smarty/smarty:dev-master
+	# 5.0.0, required for PHP 8.2 and higher
+
+	# START OF hoop jumping to load Smarty without Composer
+	# https://github.com/smarty-php/smarty/issues/999#issuecomment-2109190898
 	
-	require "vendor/autoload.php";
-	require "vendor/smarty/smarty/src/Smarty.php";
-	use Smarty\Smarty;
-	 
-	$GLOBALS['smarty'] = new Smarty();
+	define('SMARTY_DIR', dirname(__FILE__) . "/smarty-5.3.0/");
+	
+	require_once(SMARTY_DIR . "functions.php");
+	
+	spl_autoload_register(function ($class) {
+		// Class prefix
+		$prefix = 'Smarty\\';
+		
+		// If we are not a member of above class skip
+		if (!str_starts_with($class, $prefix)) { return; }
+
+		// Hack off the prefix part
+		$relative_class = substr($class, strlen($prefix));
+
+		// Build a path to the include file
+		$file = SMARTY_DIR . str_replace('\\', '/', $relative_class) . '.php';
+		
+		// If the file exists, require it
+		if (file_exists($file))  { require_once($file); }
+	});
+
+	
+	# END OF hoop jumping to load Smarty without Composer
+	
+	$GLOBALS['smarty'] = new Smarty\Smarty();
 
 	$GLOBALS['smarty']->setTemplateDir($GLOBALS['cfg']['smarty_template_dir']);
 	$GLOBALS['smarty']->setCompileDir($GLOBALS['cfg']['smarty_compile_dir']);
