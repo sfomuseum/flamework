@@ -18,9 +18,9 @@
 {foreach from=$details.parameters item="param"}
 {if $param.documented}
 
-<div class="form-group">
+<div class="form-group api-param">
 <label for="{$param.name|escape}" title="{$param.description|escape}">
-{$param.name|escape} {if $param.required} <span class="text-danger">(required)</span>{/if}
+{$param.name|escape} (<code>{$param.type|@escape}</code>) {if $param.required} <span class="text-danger">required</span>{/if}
 </label>
 <input type="text" name="{$param.name|escape}" class="form-control" placeholder="{$param.description|truncate:100:"..."|escape}" id="q-{$param.name|escape}"/>
 {if $param.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|escape} to your query" data-q="{$param.name|escape}">{$param.example|escape}</span></div>{/if}
@@ -31,8 +31,8 @@
 
 {if "api_extras"|@features_is_enabled && $details.extras}
 
-<div class="form-group">
-<label for="page">extras</label>
+<div class="form-group api-param">
+<label for="page">extras (<code>string</code>)</label>
 <input type="text" name="extras" class="form-control" value="" placeholder="{$cfg.api.extras.notes.0|escape}" id="q-extras"/>
 {if $cfg.api_extras.example}<div class="api-param-example"><span class="example" title="click to add {$param.example|escape} to your query" data-q="extras">{$cfg.api_extras.example|escape}</span></div>{/if}
 </div>
@@ -42,42 +42,42 @@
 {if $details.paginated}
 {if $details.pagination == "cursor"}
 
-<div class="form-group">
-<label for="page">cursor</label>
+<div class="form-group api-param">
+<label for="page">cursor (<code>string</code>)</label>
 <input type="text" name="cursor" class="form-control" value="" placeholder="This method uses cursor-based pagination so this argument is the pointer returned by the last API response." />
 </div>
 
-<div class="form-group">
+<div class="form-group api-param">
 <label for="per_page">per page</label>
 <input type="text" name="per_page" class="form-control" value="100" />
 </div>
 
 {elseif $details.pagination == "mixed"}
 
-<div class="form-group">
-<label for="page">cursor</label>
+<div class="form-group api-param">
+<label for="page">cursor (<code>string</code>)</label>
 <input type="text" name="cursor" class="form-control" value="" placeholder="This method sometimes uses cursor-based pagination so this argument is the pointer returned by the last API response." />
 </div>
 
-<div class="form-group">
-<label for="page">page</label>
+<div class="form-group api-param">
+<label for="page">page (<code>int</code>)</label>
 <input type="text" name="page" class="form-control" value="1" />
 </div>
 
-<div class="form-group">
-<label for="per_page">per page</label>
+<div class="form-group api-param">
+<label for="per_page">per page (<code>int</code>)</label>
 <input type="text" name="per_page" class="form-control" value="100" />
 </div>
 
 {else}
 
-<div class="form-group">
-<label for="page">page</label>
+<div class="form-group api-param">
+<label for="page">page (<code>int</code>)</label>
 <input type="text" name="page" class="form-control" value="1" />
 </div>
 
-<div class="form-group">
-<label for="per_page">per page</label>
+<div class="form-group api-param">
+<label for="per_page">per page (<code>int</code>)</label>
 <input type="text" name="per_page" class="form-control" value="{$cfg.api_per_page_default|escape}" />
 </div>
 
@@ -107,7 +107,7 @@
 <h3 class="card-header">Authentication</h3>
 
 <div class="card-body">
-<div class="form-group">
+<div class="form-group api-param">
 <select class="form-select" name="access_token"{if $details.requires_blessing|isset && $details.requires_blessing} disabled="disabled"{/if}>
 <option x-data-perms="0" value="{$logged_out_token.access_token|escape}"{if !$cfg.user or !$details.requires_perms|isset or !$details.requires_perms} selected="selected"{/if}>Logged out</option>
 {if $cfg.user}

@@ -1,44 +1,4 @@
 window.addEventListener('load', function(e){
-
-    window.api_explorer = (function(){
-	
-	var _api = undefined;
-	
-	var self = {
-	    
-    	    'init': function(){
-		
-	    	_api = new flamework.api();
-            	_api.set_handler('endpoint', window.api_explorer.endpoint);
-		_api.set_handler('authentication', window.api_explorer.authentication);
-       	    },
-	    
-            'do': function(http_method, api_method, data, on_success, on_error){
-            	_api.do(http_method, api_method, data, on_success, on_error);
-            },
-	    
-            'endpoint': function(){
-                return document.body.getAttribute("data-api-endpoint");
-            },
-	    
-            'authentication': function(form_data){
-
-		var access_token = document.body.getAttribute("data-api-access-token");
-		
-		if (! form_data.has("access_token")){
-		    form_data.append("access_token", access_token);
-	    	}
-		
-		return form_data;
-            }
-	    
-        }
-	
-        return self;
-	
-    })();
-    
-    window.api_explorer.init();
     
     var query_el = document.querySelector("#query");
     var results_el = document.querySelector("#results");
@@ -125,7 +85,6 @@ window.addEventListener('load', function(e){
 	
 	var req_args = {
 	    'method': api_method,
-	    'access_token': 'S33KR3T',
 	};
 	
 	var form_data = new FormData(form_el);
@@ -141,8 +100,8 @@ window.addEventListener('load', function(e){
 
 	    req_args[key] = value;
 	}
-	
-	var endpoint = window.api_explorer.endpoint();
+
+	var endpoint = sfomuseum.api.endpoint();
 	
 	var req = "curl -X " + http_method;
 	req += " ";
@@ -188,7 +147,7 @@ window.addEventListener('load', function(e){
 	};
 	
 	var on_error = function(rsp){
-	    
+
 	    var json = JSON.stringify(rsp, null, '\t');
 	    var html = htmlspecialchars(json);
 	    
@@ -198,13 +157,14 @@ window.addEventListener('load', function(e){
 	    show_caveat();
 	};
 
-	try {
-	    window.api_explorer.do(http_method, api_method, req_args, on_success, on_error);
-	} catch(e) {
-	    alert("There was a problem calling the API");
-	    console.log(e);
-	}
-	
+	sfomuseum.api.do(http_method, api_method, req_args).then((rsp) => {
+	    on_success(rsp);
+	}).catch((err) => {
+	    // alert("There was a problem calling the API");
+	    console.error(err);
+	    on_error(err);
+	});
+
 	return false;
     };
 			
