@@ -34,11 +34,6 @@
 
 			$codes = http_codes();
 			$status_msg = "{$codes[ $status_code ]}";
-
-			if (($msg) && ($msg != $status_msg)){
-				$status_msg = "{$status_msg} ({$msg})";
-			}
-
 		}
 
 		else if (($is_method_error) && (isset($method_row["errors"])) && (isset($method_row["errors"][$code]))){
@@ -63,6 +58,10 @@
 			if (isset($GLOBALS['cfg']['api']['errors'][$code])){
 				$status_msg = $GLOBALS['cfg']['api']['errors'][$code]['message'];
 			}
+		}
+
+		if (($msg) && ($msg != $status_msg)){
+			$status_msg = "{$status_msg} ({$msg})";
 		}
 
 		return array(
