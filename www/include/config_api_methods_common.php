@@ -30,26 +30,26 @@
 
 		"api.tokens.refreshSiteToken" => array(
 			"description" => "...",
-			"documented" => 0,
+			"documented" => false,
 			"enabled" => features_is_enabled("api_oauth2_token_refresh"),
 			"library" => "api_tokens",
-			# "requires_crumb" => 1,
+			# "requires_crumb" => true,
 			"requires_key_role" => array("site"),
 			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.test.echo" => array(
 			"description" => "A testing method which echo's all parameters back in the response.",
-			"documented" => 1,
-			"enabled" => 1,
+			"documented" => true,
+			"enabled" => true,
 			"library" => "api_test",
 			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.test.error" => array(
 			"description" => "Return a test error from the API",
-			"documented" => 1,
-			"enabled" => 1,
+			"documented" => true,
+			"enabled" => true,
 			"library" => "api_test",
 			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
