@@ -33,13 +33,19 @@
 			$status_code = $code;
 
 			$codes = http_codes();
-			$status_msg = "{$codes[ $status_code ]} (this API method is currently disabled)";
+			$status_msg = "{$codes[ $status_code ]}";
+
+			if (($msg) && ($msg != $status_msg)){
+				$status_msg = "{$status_msg} ({$msg})";
+			}
+
 		}
 
 		else if (($is_method_error) && (isset($method_row["errors"])) && (isset($method_row["errors"][$code]))){
 
 			$status_code = $code;
 			$status_msg = $method_row["errors"][$code]['message'];
+
 		}
 
 		else if (($is_api_error) && (isset($GLOBALS['cfg']['api']['errors'][$code]))){
@@ -52,7 +58,11 @@
 		else {
 
 			$status_code = ($code < 500) ? 450 : 512;
-			$status_msg = $GLOBALS['cfg']['api']['errors'][$code]['message'];
+			$status_msg = "API method failed with unknown error";
+
+			if (isset($GLOBALS['cfg']['api']['errors'][$code])){
+				$status_msg = $GLOBALS['cfg']['api']['errors'][$code]['message'];
+			}
 		}
 
 		return array(
