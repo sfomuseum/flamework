@@ -35,7 +35,7 @@
 	function api_spec_methods(){
 
 		$export_keys = array(
-			'method',
+			'request_method',
 			'description',
 			'requires_auth',
 			'parameters',
@@ -56,7 +56,7 @@
 		);
 
 		$defaults = array(
-			'method' => 'GET',
+			'request_method' => 'GET',
 			'requires_auth' => 0,
 			'description' => '',
 			'parameters' => array(),
