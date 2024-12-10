@@ -37,7 +37,7 @@
 		$export_keys = array(
 			'request_method',
 			'description',
-			'requires_auth',
+			'requires_perms',
 			'parameters',
 			'errors',
 			'notes',
@@ -50,6 +50,7 @@
 
 		$export_keys_params = array(
 			'name',
+			'type',
 			'description',
 			'required',
 			'example',
@@ -57,12 +58,12 @@
 
 		$defaults = array(
 			'request_method' => 'GET',
-			'requires_auth' => 0,
+			'requires_perms' => 0,
 			'description' => '',
 			'parameters' => array(),
-			'errors' => array(),
-			'extras' => 0,
-			'paginated' => 0,
+			'errors' => new stdClass(),
+			'extras' => false,
+			'paginated' => false,
 			'pagination' => 'plain',
 			'disallow_formats' => array(),
 		);
@@ -116,8 +117,26 @@
 					}
 
 					$v = $params_list;
-				}
+					
+				} elseif ($k == "errors"){
 
+					$errors_list = array();
+
+					foreach ($v as $code => $details){
+
+						if (! $details["documented"]){
+							continue;
+						}
+						
+						$errors_list[] = array(
+							"code" => $code,
+							"message" => $details["message"],
+						);
+					}
+
+					$v = $errors_list;
+				}
+				
 				$method[$k] = $v;
 			}
 
