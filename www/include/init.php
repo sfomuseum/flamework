@@ -635,17 +635,6 @@
 			$token = api_site_tokens_fetch_access_token($GLOBALS['cfg']['user']);
 			$GLOBALS['smarty']->assign("site_token", $token['access_token']);
 			$GLOBALS['smarty']->assign("site_token_expires", $token['expires']);
-
-			if (features_is_enabled("api_oauth2_token_refresh")){
-
-				$crumb_key = $GLOBALS["cfg"]["api_oauth2_token_refresh_crumb_key"];
-				$crumb_target = $GLOBALS["cfg"]["api_oauth2_token_refresh_crumb_target"];
-				
-				if (($crumb_key) && ($crumb_target)){
-					$refresh_crumb = crumb_generate($crumb_key, $crumb_target);
-					$GLOBALS['smarty']->assign("site_token_refresh_crumb", $refresh_crumb);
-				}
-			}
 		}
 	}
 
