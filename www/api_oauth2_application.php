@@ -3,7 +3,7 @@
 	include("include/init.php");
 
 	features_ensure_enabled(array(
-		"api"
+		"api",
 		"api_www",
 	));
 

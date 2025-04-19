@@ -77,12 +77,6 @@
 
 	);
 
-	$GLOBALS['cfg']['enable_feature_api_oauth2_token_refresh'] = 0;
-	$GLOBALS['cfg']['api_oauth2_token_refresh_window'] = 3600 * 1;
-	$GLOBALS['cfg']['api_oauth2_token_refresh_crumb_key'] = "";
-	$GLOBALS['cfg']['api_oauth2_token_refresh_crumb_target'] = "";
-	$GLOBALS['cfg']['api_oauth2_token_refresh_crumb_ttl'] = 3600 * 2;
-
 	$GLOBALS['cfg']['api_extras'] = array(
 		# 'notes' => array(),
 		# 'example' => '',
