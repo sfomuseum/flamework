@@ -8,7 +8,7 @@
 	# START OF hoop jumping to load Smarty without Composer
 	# https://github.com/smarty-php/smarty/issues/999#issuecomment-2109190898
 	
-	define('SMARTY_DIR', dirname(__FILE__) . "/smarty-5.3.0/");
+	define('SMARTY_DIR', dirname(__FILE__) . "/smarty-5.5.1/");
 	
 	require_once(SMARTY_DIR . "functions.php");
 	
