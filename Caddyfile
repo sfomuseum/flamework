@@ -1,0 +1,46 @@
+{
+	# https://frankenphp.dev/docs/config/
+	frankenphp
+	order php_server before file_server
+}
+
+localhost {
+
+	# https://caddyserver.com/docs/caddyfile/directives/root  
+	root www
+	
+	# https://caddyserver.com/docs/caddyfile/directives/encode
+	encode zstd br gzip
+	
+	# Execute PHP files in the current directory and serve assets
+	php_server
+
+	# https://caddyserver.com/docs/caddyfile/directives/log
+	log {
+	    	level DEBUG
+		output stderr
+	}
+	
+	# https://caddyserver.com/docs/caddyfile/directives/error
+	handle_errors {
+        	rewrite * /500.php
+        }
+
+	# https://caddyserver.com/docs/caddyfile/directives/rewrite
+	# https://caddyserver.com/docs/caddyfile/directives/uri
+
+	rewrite /.htaccess		/404.php
+	rewrite /.user.ini		/404.php	
+	
+	rewrite /about/     		/about.php
+	rewrite /account/		/account.php
+	rewrite /account/password/	/account_password.php
+	rewrite /account/delete/	/account_delete.php
+
+	rewrite /contact/	     	/contact.php
+	rewrite /checkcookie/     	/checkcookie.php	
+
+	rewrite /signup/		/signup.php
+	rewrite /signin/     		/signin.php
+	rewrite /signout/		/signout.php
+}
