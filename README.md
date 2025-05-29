@@ -27,15 +27,15 @@ Historically, `flamework` applications have been deployed as part of a standard 
 
 ### FrankenPHP
 
-There is still-experimental work to run the `flamework` application provided by this repository under a [FrankenPHP server](https://frankenphp.dev/). There is an example `Caddyfile` configuration file in [caddy/Caddyfile](caddy/Caddyfile). (Under the hood the `FrankenPHP` application is using the [Caddy webserver](https://caddyserver.com/).
+There is still-experimental work to run the `flamework` application provided by this repository under a [FrankenPHP server](https://frankenphp.dev/). Under the hood the `FrankenPHP` application is using the [Caddy webserver](https://caddyserver.com/) and there is an example `Caddyfile` configuration file in [caddy/Caddyfile](caddy/Caddyfile). 
 
-The details of [installing FrankenPHP](https://github.com/dunglas/frankenphp?tab=readme-ov-file#getting-started) are outside the scope of this document but once you have you can Flamework by running:
+The details of [installing FrankenPHP](https://github.com/dunglas/frankenphp?tab=readme-ov-file#getting-started) are outside the scope of this document but once you have you can test Flamework by running:
 
 ```
 $> frankenphp run --config caddy/Caddyfile
 ```
 
-_In May 2025, the PHP Foundation announced that it would [officially support the FrankenPHP project](https://thephp.foundation/blog/2025/05/15/frankenphp/).
+_In May 2025, the PHP Foundation announced that it would [officially support the FrankenPHP project](https://thephp.foundation/blog/2025/05/15/frankenphp/)._
 
 ### Docker
 
