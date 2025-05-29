@@ -16,22 +16,25 @@ flamework.api = (function(){
     var self = {
 
 	'_handlers': {
-	    'endpoint': null_handler,
-	    'authentication': null_handler,
+	    'endpoint': function(){
+		var u = new URL(location.origin);
+		u.pathname = "/api/rest/";
+		return u.toString();
+	    },
 	},
 
 	'set_handler': function(target, handler){
 
 	    if (! self._handlers[target]){
-		console.log("MISSING... " + target);
+		console.error("Invalid target");
 		return false;
 	    }
 
 	    if (typeof(handler) != "function"){
-		console.log(target + " IS NOT A FUNCTION");
+		console.error(target + " handler is not a function");
 		return false;
 	    }
-
+	    
 	    self._handlers[target] = handler;
 	},
 
@@ -47,18 +50,18 @@ flamework.api = (function(){
 	// https://developer.mozilla.org/en-US/docs/Web/API/FormData
 	// https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 	
-	'do': function(http_method, flamework_method, data, on_success, on_error){
+	'do': function(http_method, flamework_method, data){
 
 	    return new Promise((resolve, reject) => {
 		
-		var get_endpoint = self.get_handler('endpoint');
+		const get_endpoint = self.get_handler('endpoint');
 		
 		if (! get_endpoint){
 		    reject(self.destruct("Missing endpoint handler"));
 		    return false
 		}
 		
-		endpoint = get_endpoint();
+		var endpoint = get_endpoint();
 		
 		if (! endpoint){
 		    reject(self.destruct("Endpoint handler returns no endpoint!"));
@@ -66,7 +69,7 @@ flamework.api = (function(){
 		}
 		
 		var params = data;
-		
+
 		if (! params.append){
 		    
 		    params = new URLSearchParams();
@@ -77,13 +80,7 @@ flamework.api = (function(){
 		}
 		
 		params.append('method', flamework_method);
-		
-		var set_auth = self.get_handler('authentication');
-		
-		if (set_auth){
-		    params = set_auth(params);
-		}
-		
+
 		var onload = function(rsp){
 		    
 		    var target = rsp.target;
