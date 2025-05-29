@@ -4,7 +4,7 @@
 <div class="container">
 	<h1>Your account</h1>
 
-	{if $smarty.get.password}<p class="message">Your password has been updated.</p>{/if}
+	{if "password"|@smarty_get}<p class="message">Your password has been updated.</p>{/if}
 
 	<ul>
 		<li><a href="/account/password">Change your password</a></li>

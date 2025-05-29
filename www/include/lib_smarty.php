@@ -76,6 +76,22 @@
 		echo "</div>\n";
 	}
 
+	#######################################################################################
+
+	# This exists because $smarty.get.PARAMETER triggers warnings if
+	# PARAMTER is not set in $_GET
+	function smarty_get($k){
+
+		if (array_key_exists($k, $_GET)){
+			return $_GET[$k];
+		}
+	}
+	
+	#######################################################################################
+	
 	$GLOBALS['smarty']->registerPlugin('function', 'timings', 'smarty_timings');
+	$GLOBALS['smarty']->registerPlugin('modifier', 'smarty_get', 'smarty_get');	
 
 	#######################################################################################
+
+	# the end
