@@ -1,10 +1,20 @@
 {
+
+	# https://caddyserver.com/docs/caddyfile/options
+	
 	# https://frankenphp.dev/docs/config/
 	frankenphp
+
+	# Uncomment this if you want to run without TLS
+	# http_port 8080
+	# auto_https off
 }
 
-localhost {
+# Uncomment this (and comment out plain-vanilla "localhost") if you want to run without TLS
+# localhost:8080 {
 
+localhost {
+	
 	# https://caddyserver.com/docs/caddyfile/directives/root  
 	root www
 	
