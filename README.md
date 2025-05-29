@@ -37,7 +37,7 @@ There is still-experimental work to run the `flamework` application provided by 
 The details of [installing FrankenPHP](https://github.com/dunglas/frankenphp?tab=readme-ov-file#getting-started) are outside the scope of this document but once you have you can test Flamework by running:
 
 ```
-$> frankenphp run --config caddy/Caddyfile
+$> frankenphp run --config frankenphp/Caddyfile
 ```
 
 And then when you open your web browser to `http://localhost` you should see something like this:
