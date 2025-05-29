@@ -86,5 +86,51 @@ localhost {
     	       rewrite * /api_format.php?{query}&format={re.1}
         }
 	
+        # redir /api/applications/?$							/api/oauth2/applications/?{query} permanent
+        # redir /api/applications/register/?$						/api/oauth2/applications/register/?{query} permanent
+
+        uri path_regexp /api/oauth2/applications/?$			/api_oauth2_applications.php
+        uri path_regexp /api/oauth2/applications/register/?$		/api_oauth2_application_register.php
+
+	@api_application {
+	        path_regexp /api/oauth2/applications/([a-zA-Z0-9]+)/?$
+	}
+
+	handle @api_application {
+	       rewrite * /api_oauth2_application.php?{query}&api_key={re.1}
+	}
+
+	@api_application_tokens {
+        	path_regexp /api/oauth2/applications/([a-zA-Z0-9]+)/tokens(/page([0-9]+))?/?$
+	}
+
+	handle @api_application_tokens {
+	       rewrite * /api_oauth2_application_tokens.php?{query}&api_key={re.1}&page={re.2}
+	}
+
+        uri path_regexp /api/oauth2/?$							/api_oauth2.php
+        uri path_regexp /api/oauth2/howto/?$						/api_oauth2_howto.php
+        uri path_regexp /api/oauth2/authenticate/?$					/api_oauth2_authenticate.php
+        uri path_regexp /api/oauth2/authenticate/like-magic/?$				/api_oauth2_authenticate_like_magic.php
+        uri path_regexp /api/oauth2/access_token/?$					/api_oauth2_access_token.php
+        uri path_regexp /api/oauth2/access_token/refresh/?$				/api_oauth2_refresh_token.php
+
+	@api_access_tokens {
+	     path_regexp /api/oauth2/tokens(/page([0-9]+))?/?$
+	}
+
+	handle @api_access_tokens {
+	       rewrite * /api_oauth2_tokens.php?{query}&page={re.1}
+	}
+
+	@api_access_token {
+        	path_regexp /api/oauth2/tokens/([a-zA-Z0-9]+)/?$
+	}
+
+	handle @api_access_token {
+		rewrite * /api_oauth2_token.php?{query}&api_key={re.1}
+	}
+
+        uri path_regexp /api/rest/?$							/api_rest.php
 
 }
