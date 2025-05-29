@@ -1,7 +1,6 @@
 {
 	# https://frankenphp.dev/docs/config/
 	frankenphp
-	order php_server before file_server
 }
 
 localhost {
@@ -86,9 +85,6 @@ localhost {
     	       rewrite * /api_format.php?{query}&format={re.1}
         }
 	
-        # redir /api/applications/?$							/api/oauth2/applications/?{query} permanent
-        # redir /api/applications/register/?$						/api/oauth2/applications/register/?{query} permanent
-
         uri path_regexp /api/oauth2/applications/?$			/api_oauth2_applications.php
         uri path_regexp /api/oauth2/applications/register/?$		/api_oauth2_application_register.php
 

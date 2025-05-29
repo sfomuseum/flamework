@@ -23,7 +23,7 @@ Documentation is incomplete. For the time have a look at the [docs](docs} folder
 
 Before deploying a Flamework application you will still need to perform the following tasks manually:
 
-* Configuring MySQL database schemas and users. See [Database Model](docs/database_model.md) and [schema/(.schema](schema) for details.
+* Configuring MySQL database schemas and users. See [Database Model](docs/database_model.md) and [schema/*.schema](schema) for details.
 * Creating a new `www/include/secrets.php` file with the MySQL database and other credentials. See [www/include/secrets.php.example](www/include/secrets.php.example) for details.
 
 ### Apache (httpd)
@@ -39,6 +39,10 @@ The details of [installing FrankenPHP](https://github.com/dunglas/frankenphp?tab
 ```
 $> frankenphp run --config caddy/Caddyfile
 ```
+
+And then when you open your web browser to `http://localhost` you should see something like this:
+
+![](docs/images/flamework-frankenphp.png)
 
 _In May 2025, the PHP Foundation announced that it would [officially support the FrankenPHP project](https://thephp.foundation/blog/2025/05/15/frankenphp/)._
 
