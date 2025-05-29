@@ -101,7 +101,8 @@ window.addEventListener('load', function(e){
 	    req_args[key] = value;
 	}
 
-	var endpoint = ""; //flamework.api.endpoint();
+	var get_endpoint = flamework.api.get_handler("endpoint");
+	var endpoint = get_endpoint();
 	
 	var req = "curl -X " + http_method;
 	req += " ";
