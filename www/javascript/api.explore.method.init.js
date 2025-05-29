@@ -101,7 +101,7 @@ window.addEventListener('load', function(e){
 	    req_args[key] = value;
 	}
 
-	var endpoint = sfomuseum.api.endpoint();
+	var endpoint = ""; //flamework.api.endpoint();
 	
 	var req = "curl -X " + http_method;
 	req += " ";
@@ -157,7 +157,9 @@ window.addEventListener('load', function(e){
 	    show_caveat();
 	};
 
-	sfomuseum.api.do(http_method, api_method, req_args).then((rsp) => {
+	console.log("DO", http_method, api_method, req_args);
+	
+	flamework.api.do(http_method, api_method, req_args).then((rsp) => {
 	    on_success(rsp);
 	}).catch((err) => {
 	    // alert("There was a problem calling the API");
