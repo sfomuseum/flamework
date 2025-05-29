@@ -44,4 +44,29 @@ localhost {
 	uri path_regexp /signup/?$ 		/signup.php
 	uri path_regexp /signin/?$ 		/signin.php	
 	uri path_regexp /signout/?$ 		/signout.php
+
+        uri path_regexp /api/?$				/api.php
+        uri path_regexp /api/methods/?$			/api_methods.php
+        # uri path_regexp /api/methods/print/?$		/api_methods.php?print=1
+
+        uri path_regexp /api/methods/explore/?$		/api_methods.php
+
+	# https://caddyserver.com/docs/caddyfile/matchers#named-matchers
+	
+	@api_method {
+	    path_regexp /api/methods/(.*)/?$
+	}
+
+	handle @api_method {
+    	       rewrite * /api_method.php?method={re.1}
+        }
+
+	@api_method_explore {
+             path_regexp /api/methods/(.*)/explore/?$
+	}
+
+	handle @api_method_explore {
+               rewrite * /api_method_explore.php?method={re.1}
+	}
+
 }

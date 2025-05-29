@@ -80,6 +80,7 @@
 
 	# This exists because $smarty.get.PARAMETER triggers warnings if
 	# PARAMTER is not set in $_GET
+	
 	function smarty_get($k){
 
 		if (array_key_exists($k, $_GET)){
