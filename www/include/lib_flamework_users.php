@@ -57,7 +57,7 @@
 	# in $update IS NOT ESCAPED.
 	#
 
-	function flamework_users_update_user(&$user, $update){
+	function flamework_users_update_user($user, $update){
 
 		$hash = array();
 

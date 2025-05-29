@@ -31,16 +31,17 @@ localhost {
 
 	rewrite /.htaccess		/404.php
 	rewrite /.user.ini		/404.php	
+
+	uri path_regexp /about/?$     		/about.php
+
+	uri path_regexp /account/?$		/account.php	
+	uri path_regexp /account/password/?$	/account_password.php	
+	uri path_regexp /account/delete/?$	/account_delete.php
+
+	uri path_regexp /contact/?$	     	/contact.php
+	uri path_regexp /checkcookie/?$     	/checkcookie.php	
 	
-	rewrite /about/     		/about.php
-	rewrite /account/		/account.php
-	rewrite /account/password/	/account_password.php
-	rewrite /account/delete/	/account_delete.php
-
-	rewrite /contact/	     	/contact.php
-	rewrite /checkcookie/     	/checkcookie.php	
-
-	rewrite /signup/		/signup.php
-	rewrite /signin/     		/signin.php
-	rewrite /signout/		/signout.php
+	uri path_regexp /signup/?$ 		/signup.php
+	uri path_regexp /signin/?$ 		/signin.php	
+	uri path_regexp /signout/?$ 		/signout.php
 }

@@ -2,4 +2,4 @@ docker:
 	docker buildx build --platform=linux/amd64 --no-cache=true -f Dockerfile -t flamework .
 
 server:
-	frankenphp run --config Caddyfile
+	frankenphp run --resume --config Caddyfile
