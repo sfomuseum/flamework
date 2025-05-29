@@ -21,6 +21,11 @@ Documentation is incomplete. For the time have a look at the [docs](docs} folder
 
 ## Deploying
 
+Before deploying a Flamework application you will still need to perform the following tasks manually:
+
+* Configuring MySQL database schemas and users. See [Database Model](docs/database_model.md) and [schema/(.schema](schema) for details.
+* Creating a new `www/include/secrets.php` file with the MySQL database and other credentials. See [www/include/secrets.php.example](www/include/secrets.php.example) for details.
+
 ### Apache (httpd)
 
 Historically, `flamework` applications have been deployed as part of a standard LAMP-stack running under the [Apache HTTP server](https://httpd.apache.org/). There is an example `VirtualHost` setup in [httpd/flamework.conf](httpd/flamework.conf).
