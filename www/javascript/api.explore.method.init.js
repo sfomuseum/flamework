@@ -158,12 +158,9 @@ window.addEventListener('load', function(e){
 	    show_caveat();
 	};
 
-	console.log("DO", http_method, api_method, req_args);
-	
 	flamework.api.do(http_method, api_method, req_args).then((rsp) => {
 	    on_success(rsp);
 	}).catch((err) => {
-	    // alert("There was a problem calling the API");
 	    console.error(err);
 	    on_error(err);
 	});

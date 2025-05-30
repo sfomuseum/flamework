@@ -10,15 +10,11 @@
     {if !$no_card_headers}{include file="inc_card_headers.txt"}{/if}
     {if $extra_meta}{$extra_meta}{/if}
 
-    <link href="{$cfg.abs_root_url}css/bootstrap.5.3.2.min.css" rel="stylesheet" />   
+    <link href="{$cfg.abs_root_url}css/bootstrap.5.3.6.min.css" rel="stylesheet" />   
     <link href="{$cfg.abs_root_url}css/flamework.css" rel="stylesheet" />
     <link href="{$cfg.abs_root_url}css/api.css" rel="stylesheet" />         
 
-    {if "api"|@features_is_enabled}
-    <script type="text/javascript" src="{$cfg.abs_root_url}javascript/htmlspecialchars.min.js"></script>
-    <script type="text/javascript" src="{$cfg.abs_root_url}javascript/flamework.api.js"></script>
-    {/if}
-
+    {* js is loaded in inc_foot unless there is a specific reason not to *}
   </head>
 
     {assign var="api_endpoint" value=$cfg.api_abs_root_url|cat:$cfg.api_endpoint}

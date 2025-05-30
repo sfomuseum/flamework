@@ -141,17 +141,17 @@ flamework.api = (function(){
 			    req.open(http_method, endpoint, true);
 			    req.send(params);
 			    break;
-			case "PUT":
-			    // 
-			default:
+			case "GET":
 			    endpoint = endpoint + "?" + params.toString();
 			    req.open(http_method, endpoint, true);
 			    req.send(null);
 			    break;
+			default:
+			    reject("Method not supported");
+			    return false;
 		    }
 		    
 		} catch (e) {
-		    
 		    reject(self.destruct("failed to send request, because " + e));
 		    return false;
 		}

@@ -39,10 +39,12 @@ localhost {
 	# https://caddyserver.com/docs/caddyfile/directives/uri
 	# https://caddyserver.com/docs/caddyfile/matchers#named-matchers
 	
-	rewrite /.htaccess		/404.php
-	rewrite /.user.ini		/404.php	
+	rewrite /.htaccess			/404.php
+	rewrite /.user.ini			/404.php	
 
+	uri path_regexp /ping/?$     		/ping.php	
 	uri path_regexp /about/?$     		/about.php
+	uri path_regexp /contact/?$    		/contact.php	
 
 	uri path_regexp /account/?$		/account.php
 	uri path_regexp /account/password/?$	/account_password.php	
@@ -54,6 +56,16 @@ localhost {
 	uri path_regexp /signup/?$ 		/signup.php
 	uri path_regexp /signin/?$ 		/signin.php	
 	uri path_regexp /signout/?$ 		/signout.php
+
+	uri path_regexp /forgot/?$ 		/forgot.php	
+
+	@reset_password {
+             path_regexp /reset/([a-zA-Z0-9]+)/?$
+	}
+
+	handle @reset_password {
+               rewrite * /reset.php?{query}&reset=(re.1}
+	}
 
         uri path_regexp /api/?$				/api.php
         uri path_regexp /api/methods/?$			/api_methods.php
@@ -85,7 +97,7 @@ localhost {
 
         uri path_regexp /api/errors/?$			/api_errors.php
         uri path_regexp /api/pagination/?$		/api_pagination.php	
-        uri path_regexp /api/formats/?$		/api_formats.php
+        uri path_regexp /api/formats/?$			/api_formats.php
 
 	@api_format {
 	    path_regexp /api/formats/(.*)/?$
