@@ -82,7 +82,7 @@
 
 	<li><strong>You create an application</strong> and <a href="{$cfg.api_abs_root_url}oauth2/applications/register/">register it</a> with <a href="{$cfg.abs_root_url}" class="api-site-name">{$cfg.site_name|escape}</a>. As part of the registration process you will include a URL where users will be sent to complete the authorization process.</li>
 
-	<li><strong>When you want a user to agree to let your application act on their behalf</strong> you send them to the application authentication page on <a href="{$cfg.abs_root_ur}" class="api-site-name">{$cfg.site_name|escape}</a>.</li>
+	<li><strong>When you want a user to agree to let your application act on their behalf</strong> you send them to the application authentication page on <a href="{$cfg.abs_root_url}" class="api-site-name">{$cfg.site_name|escape}</a>.</li>
 
 	<li><strong>Once the user approves the authorization request</strong> they are returned to the URL you defined when you registered your application. The URL will contain a unique code that can be exchanged for an access token. The code is time-sensitive and is your application's proof to <a href="{$cfg.abs_root_url}" class="api-site-name">{$cfg.site_name|escape}</a> that a user has approved the authorization request.</li>
 
