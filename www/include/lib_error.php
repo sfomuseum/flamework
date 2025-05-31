@@ -273,7 +273,8 @@
 		$lengths = array();
 		foreach ($pairs as $pair){
 			foreach ($pair as $k => $str){
-				$lengths[$k] = max(intval($lengths[$k]), strlen($str));
+				$len_k = (array_key_exists($k, $lengths)) ? intval($lengths[$k]) : 0;
+				$lengths[$k] = max($len_k, strlen($str));
 			}
 		}
 

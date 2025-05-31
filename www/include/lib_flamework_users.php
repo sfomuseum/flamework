@@ -31,7 +31,7 @@
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_insert('users', $hash);
+		$ret = db_insert('accounts', $hash);
 
 		if (!$ret['ok']) return $ret;
 
@@ -65,7 +65,7 @@
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_update('users', $hash, "id={$user['id']}");
+		$ret = db_update('accounts', $hash, "id={$user['id']}");
 
 		if (!$ret['ok']) return $ret;
 

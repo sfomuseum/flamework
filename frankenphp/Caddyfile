@@ -38,6 +38,13 @@ localhost {
 	# https://caddyserver.com/docs/caddyfile/directives/rewrite
 	# https://caddyserver.com/docs/caddyfile/directives/uri
 	# https://caddyserver.com/docs/caddyfile/matchers#named-matchers
+
+	# These three (especially) the first one are important. They are
+	# the rules which prevent library code and the secrets file from
+	# being viewable.
+	uri path_regexp /include/.*		/404.php
+	uri path_regexp /templates/.*		/404.php
+	uri path_regexp /templates_c/.*		/404.php	
 	
 	rewrite /.htaccess			/404.php
 	rewrite /.user.ini			/404.php	
