@@ -33,8 +33,9 @@
 
 		if (features_is_enabled("api_cors")){
 
-			if ($origin = $GLOBALS['cfg']['api_cors_allow_origin']){
-				header("Access-Control-Allow-Origin: " . htmlspecialchars($origin));
+			if ($origins = $GLOBALS['cfg']['api_cors_allow_origin']){
+				$str_origins = implode(",", $origins);
+				header("Access-Control-Allow-Origin: " . htmlspecialchars($str_origins));
 			}
 		}
 

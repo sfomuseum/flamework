@@ -90,7 +90,7 @@
 
 	#################################################################
 
-	function flamework_login_do_login(&$user, $redir=''){
+	function flamework_login_do_login($user, $redir=''){
 
 		$expires = ($GLOBALS['cfg']['enable_feature_persistent_login']) ? strtotime('now +10 years') : 0;
 
@@ -156,7 +156,7 @@
 	function flamework_login_set_cookie($name, $value, $expire=0, $path='/'){
 		# $domain = ($GLOBALS['cfg']['environment'] == 'localhost') ? $GLOBALS['cfg']['auth_cookie_domain'] : false;
 
-		$domain = $GLOBALS['cfg']['auth_cookie_domain'];
+		$domain = $GLOBALS['cfg']['auth_cookie_domain'] || "";
 		$secure = (($GLOBALS['cfg']['auth_cookie_require_https']) && (isset($_SERVER['HTTPS'])) && ($_SERVER['HTTPS'] == 'on')) ? 1 : 0;
 
 		# error_log("COOKIE name={$name} value=xxx expires={$expire} domain={$domain} secure={$secure}");

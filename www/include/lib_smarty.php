@@ -8,7 +8,7 @@
 	# START OF hoop jumping to load Smarty without Composer
 	# https://github.com/smarty-php/smarty/issues/999#issuecomment-2109190898
 	
-	define('SMARTY_DIR', dirname(__FILE__) . "/smarty-5.3.0/");
+	define('SMARTY_DIR', dirname(__FILE__) . "/smarty-5.5.1/");
 	
 	require_once(SMARTY_DIR . "functions.php");
 	
@@ -76,6 +76,23 @@
 		echo "</div>\n";
 	}
 
+	#######################################################################################
+
+	# This exists because $smarty.get.PARAMETER triggers warnings if
+	# PARAMTER is not set in $_GET
+	
+	function smarty_get($k){
+
+		if (array_key_exists($k, $_GET)){
+			return $_GET[$k];
+		}
+	}
+	
+	#######################################################################################
+	
 	$GLOBALS['smarty']->registerPlugin('function', 'timings', 'smarty_timings');
+	$GLOBALS['smarty']->registerPlugin('modifier', 'smarty_get', 'smarty_get');	
 
 	#######################################################################################
+
+	# the end

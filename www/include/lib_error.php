@@ -10,9 +10,8 @@
 
 	function error_404($msg=null){
 
-		$url  = $_SERVER['REQUEST_URI'];
-		$orig = $_SERVER['REDIRECT_URL'];
-
+		$url  = (array_key_exists("REQUEST_URI", $_SERVER)) ? $_SERVER['REQUEST_URI'] : "";
+		$orig = (array_key_exists("REQUEST_URL", $_SERVER)) ? $_SERVER['REDIRECT_URL'] : "";
 
 		#
 		# try removing a slash at the end if:
@@ -20,8 +19,23 @@
 		# 2) it currently has a slash at the end
 		#
 
-		list($url_path, $url_qs) = explode('?', $url, 2);
+		$url_path = null;
+		$url_qs = null;
 
+		$url_parts = explode('?', $url, 2);
+
+		switch (count($url_parts)){
+		case 2:
+			$url_path = $url_parts[0];
+			$url_qs = $url_parts[1];
+			break;
+		case 1;		   
+			$url_path = $url_parts[0];
+			break;
+		default:
+			// pass
+		}
+		
 		if ($url_path == $orig){
 			if (substr($url_path, -1) == '/'){
 				if (strlen($url_qs)) $url_qs = '?'.$url_qs;
@@ -35,11 +49,13 @@
 		# static redirect map. add things here if you know you moved them.
 		#
 
-		if ($redir = $GLOBALS['cfg']['rewrite_static_urls'][$url]){
-			header("location: {$redir}");
-			exit;
+		if (array_key_exists($url, $GLOBALS['cfg']['rewrite_static_urls'])){
+		
+			if ($redir = $GLOBALS['cfg']['rewrite_static_urls'][$url]){
+				header("location: {$redir}");
+				exit;
+			}
 		}
-
 
 		#
 		# give up
@@ -60,8 +76,8 @@
 
 		$debug_block .= "Args:\n";
 		$args = array(
-			'SERVER_REQUEST_URI'	=> $_SERVER['REQUEST_URI'],
-			'SERVER_REDIRECT_URL'	=> $_SERVER['REDIRECT_URL'],
+			'SERVER_REQUEST_URI'	=> (array_key_exists('REQUEST_URI', $_SERVER)) ? $_SERVER['REQUEST_URI'] : "",
+			'SERVER_REDIRECT_URL'	=> (array_key_exists('REDIRECT_URL', $_SERVER)) ? $_SERVER['REDIRECT_URL'] : "",
 		);
 		$debug_block .= error_format_hash($args)."\n\n";
 
@@ -257,7 +273,8 @@
 		$lengths = array();
 		foreach ($pairs as $pair){
 			foreach ($pair as $k => $str){
-				$lengths[$k] = max(intval($lengths[$k]), strlen($str));
+				$len_k = (array_key_exists($k, $lengths)) ? intval($lengths[$k]) : 0;
+				$lengths[$k] = max($len_k, strlen($str));
 			}
 		}
 

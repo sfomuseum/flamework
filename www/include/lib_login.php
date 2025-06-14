@@ -18,7 +18,7 @@
 		return call_user_func($func);
 	}
 
-	function login_do_login(&$user, $redir=''){
+	function login_do_login($user, $redir=''){
 		$provider = login_get_provider();	
 		$func = "{$provider}_login_do_login";
 		return call_user_func($func, $user, $redir);

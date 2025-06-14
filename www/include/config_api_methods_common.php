@@ -9,7 +9,6 @@
 			"documented" => features_is_enabled("api_documentation"),
 			"enabled" => features_is_enabled("api_documentation"),
 			"library" => "api_spec",
-			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.spec.errors" => array (
@@ -17,7 +16,6 @@
 			"documented" => features_is_enabled("api_documentation"),
 			"enabled" => features_is_enabled("api_documentation"),
 			"library" => "api_spec",
-			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.spec.formats" => array(
@@ -25,7 +23,6 @@
 			"documented" => features_is_enabled("api_documentation"),
 			"enabled" => features_is_enabled("api_documentation"),
 			"library" => "api_spec",
-			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.test.echo" => array(
@@ -33,7 +30,6 @@
 			"documented" => true,
 			"enabled" => true,
 			"library" => "api_test",
-			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 		"api.test.error" => array(
@@ -41,7 +37,6 @@
 			"documented" => true,
 			"enabled" => true,
 			"library" => "api_test",
-			"disallow_formats" => array( "csv", "geojson", "meta" ),
 		),
 
 	), $GLOBALS['cfg']['api']['methods']);

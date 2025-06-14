@@ -69,7 +69,7 @@
 			$GLOBALS['smarty']->assign("key_rsp", $rsp);
 
 			if ($rsp['ok']){
-				$url = "{$GLOBALS['cfg']['abs_root_url_api']}api/oauth2/applications/{$rsp['key']['api_key']}/?success=1";
+				$url = "{$GLOBALS['cfg']['api_abs_root_url']}api/oauth2/applications/{$rsp['key']['api_key']}/?success=1";
 
 				header("location: {$url}");
 				exit();

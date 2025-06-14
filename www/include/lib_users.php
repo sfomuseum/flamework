@@ -29,7 +29,7 @@
 
 	#################################################################
 
-	function users_delete_user(&$user){
+	function users_delete_user($user){
 		$provider = users_get_provider();
 		$func = "{$provider}_users_delete_user";
 		return call_user_func($func, $user);
