@@ -140,28 +140,6 @@
 	$GLOBALS['cfg']['db_profiling'] = 0;
 
 
-	# db_enable_poormans_*
-	#
-	# If enabled, then the relevant database configs and handles
-	# will be automagically prepopulated using the relevant information
-	# in 'db_main'. Again, see below for database passwords
-
-	# You should enable/set these flags if you want to
-	# use flamework in a setting where you only have access
-	# to a single database.
-
-	$GLOBALS['cfg']['db_enable_poormans_federation'] = 1;
-	$GLOBALS['cfg']['db_enable_poormans_replicas'] = 0;
-	$GLOBALS['cfg']['db_poormans_replicas_user'] = '';
-
-	# For when you want to use tickets but can't tweak
-	# your my.cnf file or set up a dedicated ticketing
-	# server. flamework does not use tickets as part of
-	# core (yet) so this is really only necessary if your
-	# application needs db tickets.
-
-	$GLOBALS['cfg']['db_enable_poormans_ticketing'] = 1;
-
 	# This will assign $pagination automatically for Smarty but
 	# you probably don't want to do this for anything resembling
 	# a complex application...
@@ -214,8 +192,10 @@
 	# $GLOBALS['cfg']['crypto_crumb_secret'] = '';
 
 	# $GLOBALS['cfg']['db_main']['pass'] = '';
+	# $GLOBALS['cfg']['db_accounts']['pass'] = '';
 	# $GLOBALS['cfg']['db_users']['pass'] = '';
-	# $GLOBALS['cfg']['db_poormans_replicas_pass'] = 'READ-FROM-SECRETS';
+	# $GLOBALS['cfg']['db_api']['pass'] = '';	
+	# $GLOBALS['cfg']['db_tickets']['pass'] = '';
 
 	# the end
 	# API methods and "blessings" are defined at the bottom

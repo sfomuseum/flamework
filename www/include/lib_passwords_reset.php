@@ -29,7 +29,7 @@
 		$enc_code = AddSlashes($code);
 		$sql = "SELECT * FROM users_password_reset WHERE reset_code='{$enc_code}'";
 
-		$rsp = db_fetch($sql);
+		$rsp = db_fetch_accounts($sql);
 		return db_single($rsp);
 	}
 
@@ -69,7 +69,7 @@
 			$enc_code = AddSlashes($code);
 
 			$sql = "SELECT 1 FROM users_password_reset WHERE reset_code='{$enc_code}'";
-			$rsp = db_fetch($sql);
+			$rsp = db_fetch_accounts($sql);
 
 			if (db_single($rsp)){
 				$code = '';

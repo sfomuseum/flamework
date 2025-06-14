@@ -16,14 +16,20 @@ As of this writing Flamework defines/expects the following clusters:
 
 + **db_main**
 
-This is the database cluster where user accounts and other lookup-style database tables live.
+This is the database cluster where "global" and other lookup-style database tables live.
+
++ **db_accounts**
+
+This is the database cluster where user account database tables live. This is a seperate cluster from `db_main`
+for when you have more than two or more Flamework applications which need to share account information.
+
++ **db_api**
+
+This is the database cluster where API-related database tables (keys, tokens, logs) live.
 
 + **db_users**
 
-These are the federated tables, sometimes called "shards". This is where the bulk of the data in Dotspotting 
-is stored because it can be spread out, in smaller chunks, across a whole bunch of databases rather than a 
-single monolithic monster database that becomes a single point of failure and it just generally a nuisance 
-to maintain.
+These are the federated tables, sometimes called "shards" where user-specfic data lives.
 
 + **db_tickets**
 

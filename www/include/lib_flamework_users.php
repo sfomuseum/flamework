@@ -31,7 +31,7 @@
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_insert('accounts', $hash);
+		$ret = db_insert_accounts('users', $hash);
 
 		if (!$ret['ok']) return $ret;
 
@@ -65,7 +65,7 @@
 			$hash[$k] = AddSlashes($v);
 		}
 
-		$ret = db_update('accounts', $hash, "id={$user['id']}");
+		$ret = db_update_accounts('users', $hash, "id={$user['id']}");
 
 		if (!$ret['ok']) return $ret;
 
@@ -89,11 +89,13 @@
 
 	#################################################################
 
-	function flamework_users_delete_user(&$user){
+	function flamework_users_delete_user($user){
 
+		$ts = time();
+		
 		return flamework_users_update_user($user, array(
 			'deleted'	=> time(),
-			'email'		=> $user['email'] . '.DELETED',
+			'email'		=> $user['email'] . ".DELETED-{$ts}",
 
 			# reset the password here ?
 		));
@@ -112,7 +114,7 @@
 
 		$sql = "SELECT * FROM users WHERE id=" . intval($id);
 
-		$rsp = db_fetch($sql);
+		$rsp = db_fetch_accounts($sql);
 		$user = db_single($rsp);
 
 		cache_set("USER-{$user['id']}", $user);
@@ -127,7 +129,7 @@
 		$enc_email = AddSlashes($email);
 		$sql = "SELECT * FROM users WHERE email='{$enc_email}'";
 
-		$rsp = db_fetch($sql);
+		$rsp = db_fetch_accounts($sql);
 		return db_single($rsp);
 	}
 
@@ -159,10 +161,10 @@
 		$enc_email = AddSlashes($email);
 		$sql = "SELECT id FROM users WHERE email='{$enc_email}' AND deleted=0";
 
-		$rsp = db_fetch($sql);
+		$rsp = db_fetch_accounts($sql);
 		$row = db_single($rsp);
 
-		return $row['id'] ? 1 : 0;
+		return (($row) && (array_key_exists('id', $row))) ? 1 : 0;
 	}
 
 	#################################################################
@@ -172,19 +174,15 @@
 		$enc_username = AddSlashes($username);
 
 		$sql = "SELECT id FROM users WHERE username='{$enc_username}' AND deleted=0";
-		$rsp = db_fetch($sql);
+		$rsp = db_fetch_accounts($sql);
 
 		$row = db_single($rsp);
-		return $row['id'] ? 1 : 0;
+		return (($row) && (array_key_exists('id', $row))) ? 1 : 0;		
 	}
 
 	#################################################################
 
 	function flamework_users_assign_cluster_id(){
-
-		if ($GLOBALS['cfg']['db_enable_poormans_federation']){
-			return 1;
-		}
 
 		# TO DO: an actual cluster ID if federated
 

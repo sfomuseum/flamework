@@ -32,7 +32,7 @@ Historically, `flamework` applications have been deployed as part of a standard 
 
 ### FrankenPHP
 
-There is still-experimental work to run the `flamework` application provided by this repository under a [FrankenPHP server](https://frankenphp.dev/). "Experimental" as in: It works but there may still be bugs, or other gotchas, which haven't been accounted for yet.
+There is still-experimental work to run the `flamework` application provided by this repository under a [FrankenPHP server](https://frankenphp.dev/). "Experimental" as in: It works but there may still be bugs, or other gotchas, which haven't been accounted for yet. The PHP used by FrankenPHP is very strict about warnings and errors which is good because it will help track down things which need to be updated (in this package) but also not-so-good because it might lead to otherwise non-critical problems triggering errors and slowing down development time. 
 
 Under the hood the `FrankenPHP` application is using the [Caddy webserver](https://caddyserver.com/) and there is an example `Caddyfile` configuration file in [caddy/Caddyfile](caddy/Caddyfile). 
 
@@ -47,10 +47,6 @@ And then when you open your web browser to `http://localhost` you should see som
 ![](docs/images/flamework-frankenphp.png)
 
 _In May 2025, the PHP Foundation announced that it would [officially support the FrankenPHP project](https://thephp.foundation/blog/2025/05/15/frankenphp/)._
-
-### Docker
-
-Sort of. There is an in-progress [Dockerfile](Dockerfile) for building a container using a minimal Amazon Linux 2023 distribution but it is incomplete and does not support using local (external to the container) code or databases.
 
 ## See also
 

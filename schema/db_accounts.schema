@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+	`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255) DEFAULT "",
+	`email` VARCHAR(255) DEFAULT "",
+	`deleted` BIGINT(20) UNSIGNED DEFAULT 0,
+	`created` BIGINT(2) UNSIGNED NOT NULL,
+	`password` CHAR(64) DEFAULT "",
+	`conf_code` CHAR(24) DEFAULT "",
+	`confirmed` BIGINT(20) UNSIGNED DEFAULT 0,
+	`cluster_id` TINYINT(3) UNSIGNED NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `by_email` (`email`),
+	UNIQUE KEY `by_username` (`username`,`deleted`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `users_password_reset`;
+
+CREATE TABLE `users_password_reset` (
+	`user_id` BIGINT(20) UNSIGNED NOT NULL,
+	`reset_code` CHAR(32) DEFAULT "",
+	`created` BIGINT(20) UNSIGNED NOT NULL,
+	UNIQUE KEY `by_code` (`reset_code`),
+	KEY `by_user` (`user_id`),
+	KEY `by_timestamp` (`created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `users_roles`;
+
+CREATE TABLE `users_roles` (
+	`user_id` BIGINT(20) UNSIGNED NOT NULL,
+	`user_role` VARCHAR(255) DEFAULT NULL,
+	UNIQUE KEY `unique_user_roles` (`user_id`,`user_role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

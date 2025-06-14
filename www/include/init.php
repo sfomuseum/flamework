@@ -348,43 +348,6 @@
 	# $GLOBALS['cfg']['auth_cookie_domain'] = parse_url($GLOBALS['cfg']['abs_root_url'], 1);
 
 	#
-	# Poor man's database configs:
-	# See notes in config.php
-	#
-
-	if ($GLOBALS['cfg']['db_enable_poormans_replicas']){
-
-		$GLOBALS['cfg']['db_main_replicas'] = $GLOBALS['cfg']['db_main'];
-
-		$GLOBALS['cfg']['db_main_replicas']['host'] = array(
-			1 => $GLOBALS['cfg']['db_main']['host'],
-		);
-
-		$GLOBALS['cfg']['db_main_replicas']['name'] = array(
-			1 => $GLOBALS['cfg']['db_main']['name'],
-		);
-	}
-
-	if ($GLOBALS['cfg']['db_enable_poormans_ticketing']){
-
-		$GLOBALS['cfg']['db_tickets'] = $GLOBALS['cfg']['db_main'];
-	}
-
-	if ($GLOBALS['cfg']['db_enable_poormans_federation']){
-
-		$GLOBALS['cfg']['db_users'] = $GLOBALS['cfg']['db_main'];
-
-		$GLOBALS['cfg']['db_users']['host'] = array(
-			1 => $GLOBALS['cfg']['db_main']['host'],
-		);
-
-		$GLOBALS['cfg']['db_users']['name'] = array(
-			1 => $GLOBALS['cfg']['db_main']['name'],
-		);
-
-	}
-
-	#
 	# install an error handler to check for dubious notices?
 	# we do this because we only care about one of the notices
 	# that gets generated. we only want to run this code in

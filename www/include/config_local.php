@@ -46,10 +46,17 @@
 		'auto_connect' => 0,
 	);
 
+        $GLOBALS['cfg']['db_accounts'] = $GLOBALS['cfg']['db_main'];
+        $GLOBALS['cfg']['db_users'] = $GLOBALS['cfg']['db_main'];	
         $GLOBALS['cfg']['db_api'] = $GLOBALS['cfg']['db_main'];
-        $GLOBALS['cfg']['db_users'] = $GLOBALS['cfg']['db_main'];
-        $GLOBALS['cfg']['db_poormans_replicas'] = $GLOBALS['cfg']['db_main'];
-	
+        $GLOBALS['cfg']['db_tickets'] = $GLOBALS['cfg']['db_main'];	
+
+	# As in an instance of flamework that has no access to
+	# its mysql config files and/or the ability to set up
+	# a dedicated DB server for tickets.
+
+	$GLOBALS['cfg']['db_enable_poormans_ticketing'] = 1;
+
 	$GLOBALS['cfg']['api_method_definitions'] = array(
 		'common',
 	);

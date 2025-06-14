@@ -8,8 +8,10 @@ Files are names after their database cluster which is to say they are designed s
 $> mysql -uroot -p
 mysql> CREATE DATABASE {DATABASE};
 
-$> mysql -uroot -p {DATABASE} < schema/db_main.schema 
+$> mysql -uroot -p {DATABASE} < schema/db_main.schema
+$> mysql -uroot -p {DATABASE} < schema/db_accounts.schema 
 $> mysql -uroot -p {DATABASE} < schema/db_api.schema
+$> mysql -uroot -p {DATABASE} < schema/db_users.schema
 $> mysql -uroot -p {DATABASE} < schema/db_tickets.schema
 
 $> mysql -uroot -p {DATABASE}
