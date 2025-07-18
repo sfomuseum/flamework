@@ -145,7 +145,7 @@
 		# only shows notices if we asked to see them
 		if ($level == 'notice' && !$GLOBALS['cfg']['admin_flags_show_notices']) return;
 
-		$type = $more['type'] ? $more['type'] : $level;
+		$type = array_key_exists('type', $more) ? $more['type'] : $level;
 
 		$out = "";
 
@@ -153,8 +153,10 @@
 
 		$out .= $msg;
 
-		if ($more['time'] > -1) $out .= " ($more[time] ms)";
-
+		if ((array_key_exists('time', $more) && ($more['time'] > -1))){
+			$out .= " ($more[time] ms)";
+		}
+		
 		$out .= "\n";
 
 		$stderr = fopen('php://stderr', 'w');
