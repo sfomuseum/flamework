@@ -40,7 +40,7 @@
 	<h3 class="card-header">Arguments</h3>
 
 	<div class="card-body">
-	{if $details.parameters|isset && $details.parameters && $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $cfg.paginated}
+	{if $details.parameters|isset && $details.parameters && $details.parameters|@count or $cfg.api_auth_type=='oauth2' or $details.paginated}
 	<ul>
 	<li><strong>access_token</strong> (<code>string</code>) &#8212; A valid <a href="{$cfg.api_abs_root_url}oauth2/">OAuth2 access token</a> <span class="text-danger">(required)</span></li>
 
@@ -158,7 +158,7 @@
 {if $api_request_method=='GET' and ($cfg.api_auth_type!='oauth2' or $cfg.api_oauth2_allow_get_parameters)}
 <pre style="font-size:small;background-color:#ededed;">curl -X <strong>{$api_request_method|escape}</strong> '{$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong>?method=<strong class="api-param-required">{$method|escape}</strong>{if $cfg.api_auth_type=='oauth2'}&access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>{/if}{if $details.parameters|isset && $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented}&{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>{if !$smarty.foreach.params.last}{/if}{/if}{/foreach}{/if}'</pre>
 {else}
-<pre style="font-size:small;background-color:#ededed;">curl -X <strong>{$api_request_method|escape}</strong> {$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong> -F "method=<strong class="api-param-required">{$method|escape}</strong>"{if $cfg.api_auth_type=='oauth2'} -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>" {/if}{if $details.parameters && $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
+<pre style="font-size:small;background-color:#ededed;">curl -X <strong>{$api_request_method|escape}</strong> {$cfg.api_abs_root_url}<strong>{$cfg.api_endpoint}</strong> -F "method=<strong class="api-param-required">{$method|escape}</strong>"{if $cfg.api_auth_type=='oauth2'} -F "access_token=<strong class="api-param-required">&lt;TOKEN&gt;</strong>" {/if}{if $details.parameters|isset && $details.parameters|@count}{foreach from=$details.parameters item="param" name="params"}{if $param.documented} -F "{$param.name|escape}=<strong{if $param.required} class="api-param-required"{/if}>&lt;{$param.name|strtoupper|escape}&gt;</strong>"{if !$smarty.foreach.params.last} {/if}{/if}{/foreach}{/if}</pre>
 {/if}
 
 </div>

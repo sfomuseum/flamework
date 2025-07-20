@@ -46,6 +46,10 @@
 		$api_key = request_str("api_key");
 		$access_token = request_str("access_token");
 
+		if ($access_token == ""){
+			$access_token = "-";
+		}
+		
 		# Log the basics
 
 		$addr = remote_addr();
@@ -168,7 +172,7 @@
 			));
 		}
 	
-		if ($auth_rsp['user']){
+		if (isset($auth_rsp['user'])){
 			$GLOBALS['cfg']['user'] = $auth_rsp['user'];
 			# api_log(array('user_id' => $auth_rsp['user']['id']));
 		}
