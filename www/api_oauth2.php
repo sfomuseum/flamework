@@ -5,6 +5,7 @@
 	features_ensure_enabled(array(
 		"api",
 		"api_www",
+		"api_delegated_auth",
 	));
 
 	if ($GLOBALS['cfg']['api_require_loggedin']){

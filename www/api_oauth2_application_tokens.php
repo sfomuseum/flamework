@@ -7,6 +7,7 @@
 	features_ensure_enabled(array(
 		"api",
 		"api_www",
+		"api_delegated_auth",
 	));
 
 	login_ensure_loggedin();

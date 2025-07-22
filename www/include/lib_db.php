@@ -95,6 +95,10 @@
 		$pass = $GLOBALS['cfg']["db_{$cluster}"]["pass"];
 		$name = $GLOBALS['cfg']["db_{$cluster}"]["name"];
 
+		$port = (array_key_exists("port", $GLOBALS['cfg']["db_{$cluster}"])) ? $GLOBALS['cfg']["db_{$cluster}"]["port"] : 3306;
+		$ssl_enable = (array_key_exists("ssl_enable", $GLOBALS['cfg']["db_{$cluster}"])) ? $GLOBALS['cfg']["db_{$cluster}"]["ssl_enable"] : 0;
+		$ssl_ca_path = (array_key_exists("ssl_enable", $GLOBALS['cfg']["db_{$cluster}"])) ? $GLOBALS['cfg']["db_{$cluster}"]["ssl_ca_path"] : "";		
+		
 		if ($shard){
 			$host = $host[$shard];
 			$name = $name[$shard];
@@ -121,9 +125,23 @@
 		}
 
 		try{
-			if (!@mysqli_real_connect($conn, $host, $user, $pass, $name)){
-				log_fatal("Connection to database cluster '{$cluster_key}' failed ({$user}@{$host}/{$name}) - ".mysqli_connect_error()." - ".error_smart_trace());
+
+			# https://www.php.net/manual/en/mysqli.ssl-set.php
+			
+			if ($ssl_enable){
+
+				$conn->ssl_set(NULL, NULL, $ssl_ca_path, NULL, NULL);
+				
+				if (!@mysqli_real_connect($conn, $host, $user, $pass, $name, $port, NULL, MYSQLI_CLIENT_SSL)){
+					log_fatal("Connection to database cluster '{$cluster_key}' failed ({$user}@{$host}/{$name}) - ".mysqli_connect_error()." - ".error_smart_trace());
+				}
+
+			} else {
+				if (!@mysqli_real_connect($conn, $host, $user, $pass, $name)){
+					log_fatal("Connection to database cluster '{$cluster_key}' failed ({$user}@{$host}/{$name}) - ".mysqli_connect_error()." - ".error_smart_trace());
+				}
 			}
+			
 		}catch (mysqli_sql_exception $e){
 			log_fatal("Connection to database cluster '{$cluster_key}' failed ({$user}@{$host}/{$name}) - ".$e->getMessage()." - ".error_smart_trace());
 		}

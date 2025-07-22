@@ -26,6 +26,23 @@ ErrorDocument 500 /500.php
 # Get mod_rewrite fired up
 RewriteEngine on
 
+# The following are provided as reference rules if you want
+# run www.HOST and api.HOST off the same codebase. Adjust to taste.
+#
+# If /rest and not API host then issue HTTP 410
+# RewriteCond %{HTTP_HOST} !^(dev)?api\.example\.com$ [NC]
+# RewriteCond %{REQUEST_URI} ^/rest
+# RewriteRule ^ - [R=404,L]
+# 
+# If /api_rest.php and not API host then issue HTTP 410
+# RewriteCond %{HTTP_HOST} !^(dev)?api\.example\.com$ [NC]
+# RewriteCond %{REQUEST_URI} ^/api_rest.php
+# RewriteRule ^ - [R=404,L]
+# 
+# If API host and not /rest then issue HTTP 410
+# RewriteCond %{HTTP_HOST} ^(dev)?api\.example\.com$ [NC]
+# RewriteRule ^/rest - [L]
+
 # Basics
 
 RewriteRule  ^about/?$			about.php 		[L,QSA]

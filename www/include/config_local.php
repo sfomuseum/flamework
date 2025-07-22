@@ -13,17 +13,22 @@
 	$GLOBALS['cfg']['site_disabled'] = 0;		# the site is disabled but we are still serving requests
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
 
-	$GLOBALS['cfg']['enable_feature_signup'] = 1;
-	$GLOBALS['cfg']['enable_feature_signin'] = 1;
-	$GLOBALS['cfg']['enable_feature_persistent_login'] = 1;
-	$GLOBALS['cfg']['enable_feature_account_delete'] = 1;
+	$GLOBALS['cfg']['enable_feature_signup'] = 0;
+	$GLOBALS['cfg']['enable_feature_signin'] = 0;
+	$GLOBALS['cfg']['enable_feature_persistent_login'] = 0;
+	$GLOBALS['cfg']['enable_feature_account_delete'] = 0;
 	$GLOBALS['cfg']['enable_feature_password_retrieval'] = 0;
 	$GLOBALS['cfg']['enable_feature_contact_page'] = 0;
 
 	$GLOBALS['cfg']['site_disabled_retry_after'] = 0;	# seconds; if set will return HTTP Retry-After header
 
-	$GLOBALS['cfg']['site_name'] = 'Flamework';
+	$GLOBALS['cfg']['site_name'] = 'Brooklyn Integers';
 
+	#
+
+	$GLOBALS['cfg']['brooklynts_sequence_increment'] = 2;
+	$GLOBALS['cfg']['brooklynts_sequence_offset'] = 1;
+	
 	#
 
 	$GLOBALS['cfg']['abs_root_url'] = "/";
@@ -41,9 +46,11 @@
 
 	$GLOBALS['cfg']['db_main'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'flamework',
-		'user'	=> 'flamework',
+		'name'	=> 'brooklynts',
+		'user'	=> 'brooklynts',
 		'auto_connect' => 0,
+		'ssl_enable' => 0,
+		'ssl_ca_path' => "",
 	);
 
         $GLOBALS['cfg']['db_accounts'] = $GLOBALS['cfg']['db_main'];
@@ -59,13 +66,19 @@
 
 	$GLOBALS['cfg']['api_method_definitions'] = array(
 		'common',
+		'brooklynintegers',
 	);
 
 	$GLOBALS['cfg']['enable_feature_api'] = 1;
 	$GLOBALS['cfg']['enable_feature_api_www'] = 1;	
 	$GLOBALS['cfg']['enable_feature_api_documentation'] = 1;
-	$GLOBALS['cfg']['enable_feature_api_explorer'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_explorer'] = 0;
 
+	$GLOBALS['cfg']['enable_feature_api_integers'] = 1;
+
+	$GLOBALS['cfg']['enable_feature_api_delegated_auth'] = 0;
+	$GLOBALS['cfg']['api_auth_type'] = 'none';
+	
 	# API (CORS)
 	
 	$GLOBALS['cfg']['enable_feature_api_cors'] = 1;
