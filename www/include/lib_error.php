@@ -231,7 +231,11 @@
 				$function = "ERROR";
 			}
 
-			$file = str_replace($root_path, '', $item['file']);
+			$file =	$root_path;
+
+			if ((array_key_exists($item, "file")) && ($item["file"] != "")){
+                                $file = str_replace($root_path, '', $item['file']);
+			}
 
 			$pairs[] = array(
 				$function,
